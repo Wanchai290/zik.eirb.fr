@@ -53,7 +53,7 @@ async function run() {
     }));
     
     app.use(cors({
-        origin: ["http://192.168.1.18:5173", "http://localhost:5173"],
+        origin: "https://zik.eirb.fr/",
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
     }));
@@ -68,7 +68,7 @@ async function run() {
         });
     });
 
-    app.use("/api/v1", routes);
+    app.use("/v1", routes);
 
     const PORT = process.env.PORT || 5000;
     db.sync().then(() => {

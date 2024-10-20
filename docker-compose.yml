@@ -1,25 +1,25 @@
 version: "3.9"
 services:
-#  redis:
-#    image: redis:latest
-#    container_name: redis
-#    restart: always
-#    expose:
-#      - 6379
-#    networks:
-#      - bda
+  redis:
+    image: redis:latest
+    container_name: zik-redis
+    restart: always
+    expose:
+      - 6379
+    networks:
+      - zik
 
   backend:
     build: ./backend/
     container_name: zik-backend
     depends_on:
-#      redis:
-#        condition: service_started
+      redis:
+        condition: service_started
       mysql:
         condition: service_healthy
     restart: always
     ports:
-      - "8661:5000"
+      - "127.0.0.1:8663:5000"
     networks:
       - zik
 
@@ -29,7 +29,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "8660:80"
+      - "127.0.0.1:8662:80"
     restart: always
     networks:
       - zik
